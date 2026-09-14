@@ -1,0 +1,74 @@
+spring:
+  application:
+    name: integrasaude-api
+
+  # Perfis
+  profiles:
+    active: dev
+
+  # Jackson (Formatação de JSON)
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: America/Sao_Paulo
+    default-property-inclusion: non_null
+
+---
+# Profile: DEV (Desenvolvimento com PostgreSQL ou H2)
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/integrasaude_db}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate # Deixa o Flyway gerenciar o schema
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+  # Email (Thymeleaf/Notification)
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:exemplo@integrasaude.com}
+    password: ${MAIL_PASSWORD:secret}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+# Porta do Servidor
+server:
+  port: 8080
+  error:
+    include-message: always
+
+# Segurança JWT
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET:minha-chave-secreta-super-segura-integrasaude-360-2026}
+
+# Documentação OpenAPI / Swagger
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha

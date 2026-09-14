@@ -1,0 +1,16 @@
+Java21/
+**/node_modules/
+**/.next/
+**/out/
+**/build/
+**/.gradle/
+**/target/
+*.log
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db

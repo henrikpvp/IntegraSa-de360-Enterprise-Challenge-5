@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Alerta de Triagem Crítica</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f6f8; padding: 20px; }
+        .alert-box { background-color: #d9534f; color: white; padding: 20px; border-radius: 8px; max-width: 600px; margin: 0 auto; }
+        .details { background-color: #ffffff; color: #333333; padding: 15px; margin-top: 15px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="alert-box">
+        <h2>ALERTA DE EMERGÊNCIA - TRIAGEM</h2>
+        <div class="details">
+            <p><strong>Paciente:</strong> <span th:text="${nomePaciente}">Nome do Paciente</span></p>
+            <p><strong>Nível de Risco:</strong> <span th:text="${nivelRisco}" style="color: red; font-weight: bold;">VERMELHO</span></p>
+            <p><strong>Saturação O2:</strong> <span th:text="${saturacao}">88</span>%</p>
+            <p><strong>Hora da Triagem:</strong> <span th:text="${horaTriagem}">10:30</span></p>
+        </div>
+    </div>
+</body>
+</html>
